@@ -14,16 +14,89 @@
   <meta name="apple-mobile-web-app-title" content="ITST 304">
   <meta name="msapplication-TileImage" content="images/logo-ccs-90.png">
   <meta name="msapplication-TileColor" content="#FFFFFF">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #tic-tac-toe-board {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+    }
+
+    .row {
+        display: flex;
+    }
+
+    .cell {
+        width: 100px;
+        height: 100px;
+        font-size: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border: 1px solid #000;
+    }
+
+    .cell:hover {
+        background-color: #eee;
+    }
+</style>
 </head>
 <body class="fullscreen">
   <div class="container">
     <h1 class="title">ITST 304</h1>
     <p>I love PWA Programming! =)</p>
-    <h1>Development of Emergency Notification App for San Pablo City</h1>
-    <p>Emergencies are really unpredictable and you wont know when will it occur. It will be very helpful to have an app that in just one tap you can already ask for help when unpredictable situations like car accidents, your house/building is on fire, thief inside your house, someone or you are having a heart attack, etc. occur. This kind of situations can be face by anyone, anywhere at any time, thats why this research is important and would be very helpful for any individual.</p>
-    <canvas id="canvas" style="height: 400px;width:300;border: 1px solid;"></canvas>
-    <script src="snake.js"></script>
+    <div id="tic-tac-toe-board">
+        <div class="row">
+            <div class="cell" onclick="makeMove(0, 0)"></div>
+            <div class="cell" onclick="makeMove(0, 1)"></div>
+            <div class="cell" onclick="makeMove(0, 2)"></div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="makeMove(1, 0)"></div>
+            <div class="cell" onclick="makeMove(1, 1)"></div>
+            <div class="cell" onclick="makeMove(1, 2)"></div>
+        </div>
+        <div class="row">
+            <div class="cell" onclick="makeMove(2, 0)"></div>
+            <div class="cell" onclick="makeMove(2, 1)"></div>
+            <div class="cell" onclick="makeMove(2, 2)"></div>
+        </div>
+    </div>
   </div>
+<script>
+    var currentPlayer = "X";
+    var gameBoard = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+    ];
+
+    function makeMove(row, col) {
+        if (gameBoard[row][col] === "") {
+            gameBoard[row][col] = currentPlayer;
+            document.getElementById("tic-tac-toe-board").children[row].children[col].innerText = currentPlayer;
+            currentPlayer = (currentPlayer === "X") ? "O" : "X";
+        }
+    }
+
+    function resetGame() {
+        currentPlayer = "X";
+        gameBoard = [
+            ["", "", ""],
+            ["", "", ""],
+            ["", "", ""]
+        ];
+        var cells = document.getElementsByClassName("cell");
+        for (var i = 0; i < cells.length; i++) {
+            cells[i].innerText = "";
+        }
+    }
+</script>
   <script src="js/main.js"></script>
 </body>
 </html>
